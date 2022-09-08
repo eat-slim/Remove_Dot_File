@@ -45,17 +45,20 @@ def TraverseDir(folder_path):
         folder = q.pop(0)
 
         # 遍历文件夹下的所有文件
-        for file in os.listdir(folder):
-            full_path = os.path.join(folder, file)
+        try:
+            for file in os.listdir(folder):
+                full_path = os.path.join(folder, file)
 
-            # ._开头的文件加入列表中
-            if file.startswith('._'):
-                files.append(full_path)
-                print(full_path)
+                # ._开头的文件加入列表中
+                if file.startswith('._'):
+                    files.append(full_path)
+                    print(len(files), full_path)
 
-            # 文件夹纳入待搜索队列
-            elif os.path.isdir(full_path):
-                q.append(full_path)
+                # 文件夹纳入待搜索队列
+                elif os.path.isdir(full_path):
+                    q.append(full_path)
+        except:
+            pass
 
     RemoveDotFile(files)
 
